@@ -7,7 +7,7 @@ const CREDS = require('./creds');
 
 (async(function run(){
 
-    const browser = await (puppeteer.launch({headless: false}));
+    const browser = await (puppeteer.launch());
     const page = await (browser.newPage());
     await (page.goto('https://www.int.simplycreditinc.com/staging/manage/#signup',{
                 timeout: 0
@@ -33,6 +33,7 @@ const CREDS = require('./creds');
     const MORTGAGE_SELECTOR = '#mortgage'
     const CHECK_BOX_SELECTOR = '#terms'
     const BUTTON_SELECTOR = '#signup-submit'
+    const FORM_SELECTOR = '#signup-form'
 
     await (page.click(INVITE_CODE_SELECTOR));
     await (page.keyboard.type(CREDS.invite_code));
@@ -90,8 +91,9 @@ const CREDS = require('./creds');
 
     await (page.click(CHECK_BOX_SELECTOR));
 
-    await (page.click(BUTTON_SELECTOR));
+    await (page.$eval(FORM_SELECTOR, form => form.submit()));
 
-    await (page.waitForNavigation({timeout : 0}));
+    console.log('Form Submitted');
 
+    browser.close();
 }))();
