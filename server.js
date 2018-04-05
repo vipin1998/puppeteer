@@ -94,6 +94,17 @@ const CREDS = require('./creds');
     await (page.$eval(FORM_SELECTOR, form => form.submit()));
 
     console.log('Form Submitted');
-
+    
+    while(true)
+    {
+        send request
+        if(request complete)
+        {
+            //done
+            break;
+        }
+    }
+    
+    
     browser.close();
 }))();
